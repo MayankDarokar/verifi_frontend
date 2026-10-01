@@ -1,0 +1,5 @@
+streamlit
+qrcode
+pillow
+python-dotenv
+tldextract
