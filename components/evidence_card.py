@@ -12,7 +12,7 @@ def render_evidence_card(evidence: List[EvidenceItem]):
     Clearly separates verifiable facts from subjective speculation.
     """
     st.markdown("#### 🔍 Discovered Evidence & Signals")
-    st.caption("Factual technical artifacts discovered during agent investigation:")
+    st.caption("Factual indicators and signals identified during the investigation:")
 
     if not evidence:
         st.info("No anomalous technical evidence detected in this interaction.")

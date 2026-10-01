@@ -14,7 +14,7 @@ def render_mismatch_card(result: AnalysisResult):
     mismatch = result.mismatch
 
     st.markdown("#### ⚡ Core Analysis: Intent vs Mechanism Verification")
-    st.caption("VeriFi isolates the user's perceived intent from the technical payment payload.")
+    st.caption("VeriFi compares what the interaction claims against what the payment mechanism actually executes.")
 
     col1, col_mid, col2 = st.columns([5, 1, 5])
 
@@ -66,7 +66,7 @@ def render_mismatch_card(result: AnalysisResult):
     <span>🚨 INTENT–MECHANISM MISMATCH DETECTED</span>
 </div>
 <div style="background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; border-radius: 0 0.5rem 0.5rem 0; padding: 0.75rem 1rem; margin-top: 0.5rem; color: #fca5a5; font-size: 0.9rem;">
-    <b>Agent Finding:</b> {mismatch.explanation}
+    <b>Key Finding:</b> {mismatch.explanation}
 </div>
 """).strip()
         st.markdown(banner_html, unsafe_allow_html=True)
@@ -76,7 +76,7 @@ def render_mismatch_card(result: AnalysisResult):
     <span>✓ INTENT AND PAYMENT MECHANISM ARE ALIGNED</span>
 </div>
 <div style="background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 0 0.5rem 0.5rem 0; padding: 0.75rem 1rem; margin-top: 0.5rem; color: #a7f3d0; font-size: 0.9rem;">
-    <b>Agent Finding:</b> {mismatch.explanation}
+    <b>Key Finding:</b> {mismatch.explanation}
 </div>
 """).strip()
         st.markdown(banner_clean_html, unsafe_allow_html=True)

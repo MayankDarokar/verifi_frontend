@@ -52,13 +52,13 @@ def render_risk_card(result: AnalysisResult):
 
     # Build clean HTML without blank line + 4-space indentation issues
     html_content = textwrap.dedent(f"""
-<div class="risk-card" style="background: {scheme['bg']}; border: 2px solid {scheme['border']};">
+<div class="risk-card" style="background: {scheme['bg']}; border: 1px solid {scheme['border']};">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
         <span style="background: {scheme['badge_bg']}; color: {scheme['badge_color']}; padding: 0.35rem 0.85rem; border-radius: 9999px; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.05em;">
             {scheme['icon']}
         </span>
         <span style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">
-            Deterministic Demo Risk Assessment
+            Evidence-Based Risk Assessment
         </span>
     </div>
     <div class="risk-score-num" style="color: {scheme['text']}; font-size: 3.2rem; font-weight: 900; line-height: 1; margin: 0.6rem 0;">
@@ -74,6 +74,6 @@ def render_risk_card(result: AnalysisResult):
 
     # Score breakdown expander
     if result.risk.score_breakdown:
-        with st.expander("📊 View Risk Points Breakdown (Deterministic Engine)", expanded=False):
+        with st.expander("📊 View Risk Factors", expanded=False):
             for item in result.risk.score_breakdown:
                 st.markdown(f"- **+{item.get('points', 0)} pts**: {item.get('signal', 'Unknown signal')}")

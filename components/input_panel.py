@@ -43,17 +43,20 @@ def render_input_panel(preset_scenario: Optional[str] = None) -> Tuple[str, Any,
         elif preset_scenario == "cashback_qr_mismatch":
             default_text = "Congratulations! You have received ₹5,000 cashback from PhonePe. Scan the QR code to receive money into your bank."
 
+        # Initialize session state for text input if needed
+        if "input_text_area" not in st.session_state:
+            st.session_state["input_text_area"] = default_text
+
         # If scenario changed, update session state text
         if "prev_preset_scenario" not in st.session_state or st.session_state["prev_preset_scenario"] != preset_scenario:
             st.session_state["prev_preset_scenario"] = preset_scenario
             if default_text:
                 st.session_state["input_text_area"] = default_text
-            elif preset_scenario is None and "input_text_area" not in st.session_state:
+            elif preset_scenario is None:
                 st.session_state["input_text_area"] = ""
 
         text_input = st.text_area(
             "Message Content:",
-            value=st.session_state.get("input_text_area", default_text),
             height=120,
             placeholder='"Congratulations! You have received ₹5,000 cashback. Scan this QR code or click here to claim your reward immediately."',
             help="Enter the exact text received.",
@@ -64,12 +67,13 @@ def render_input_panel(preset_scenario: Optional[str] = None) -> Tuple[str, Any,
         st.caption("Enter a suspicious link, payment portal, or website address:")
         default_url = "https://kbc-lucky-winner-draw-2026.online/claim-prize?user_id=89234" if preset_scenario == "lottery_prize_url" else ""
         
-        if preset_scenario == "lottery_prize_url" and "input_url_field" in st.session_state and st.session_state["input_url_field"] != default_url:
+        if "input_url_field" not in st.session_state:
+            st.session_state["input_url_field"] = default_url
+        elif preset_scenario == "lottery_prize_url" and st.session_state["input_url_field"] != default_url:
             st.session_state["input_url_field"] = default_url
 
         url_input = st.text_input(
             "Website URL:",
-            value=st.session_state.get("input_url_field", default_url),
             placeholder="e.g., https://bses-bill-update.xyz/pay or https://kbc-lucky-winner-draw-2026.online",
             help="Enter the full link received in the message.",
             key="input_url_field",

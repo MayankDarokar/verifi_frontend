@@ -8,11 +8,11 @@ from models.analysis_result import TraceEvent
 
 def render_decision_trace(trace: List[TraceEvent]):
     """
-    Render the Investigation Decision Trace.
-    Shows observable actions taken by the autonomous agent without exposing raw CoT.
+    Render the Investigation Steps.
+    Shows observable actions taken by the investigation agent without exposing raw debug logs.
     """
-    st.markdown("#### 🧠 Investigation Decision Trace")
-    st.caption("Observable trail of autonomous investigation steps and tool executions (Demo Adapter):")
+    st.markdown("#### 🧠 How VeriFi Reached This Result")
+    st.caption("Key investigation steps used to evaluate this interaction:")
 
     if not trace:
         st.caption("No trace events recorded.")

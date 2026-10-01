@@ -1,176 +1,162 @@
-/* VeriFi Financial Safety Agent - Custom Modern Styling */
+/* ==========================================================================
+   VeriFi — Evidence-Driven Financial Safety Agent
+   Editorial Product Design System (Streamlit Stylesheet)
+   ========================================================================== */
 
-/* Main Container Polish */
+/* --- Base Container & Spacing --- */
 .block-container {
-    padding-top: 2rem !important;
-    padding-bottom: 3rem !important;
-    max-width: 1200px !important;
+    padding-top: 1.75rem !important;
+    padding-bottom: 3.5rem !important;
+    max-width: 1120px !important;
 }
 
-/* Header Banner */
+/* --- Header Banner --- */
 .verifi-header {
-    background: linear-gradient(135deg, #090d16 0%, #111827 50%, #1e1b4b 100%);
-    border: 1px solid rgba(99, 102, 241, 0.2);
-    border-radius: 1rem;
-    padding: 2rem 2rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+    background: #0d1322;
+    border: 1px solid #1e293b;
+    border-radius: 0.75rem;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.75rem;
     text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.verifi-title {
-    font-size: 2.6rem;
-    font-weight: 800;
-    letter-spacing: -0.025em;
-    background: linear-gradient(to right, #ffffff, #c7d2fe, #818cf8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 0.5rem;
 }
 
 .verifi-badge-tag {
     display: inline-block;
-    background: rgba(99, 102, 241, 0.15);
-    border: 1px solid rgba(129, 140, 248, 0.4);
+    background: #1e1b4b;
+    border: 1px solid #3730a3;
     color: #a5b4fc;
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.75rem;
     border-radius: 9999px;
     margin-bottom: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
+}
+
+.verifi-title {
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: #f8fafc;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.35rem;
 }
 
 .verifi-subtitle {
-    color: #cbd5e1;
-    font-size: 1.1rem;
+    color: #94a3b8;
+    font-size: 1.05rem;
     font-weight: 500;
-    max-width: 700px;
+    max-width: 680px;
     margin: 0 auto 0.5rem auto;
+    line-height: 1.4;
 }
 
 .verifi-quote {
-    color: #94a3b8;
-    font-size: 0.9rem;
+    color: #64748b;
+    font-size: 0.85rem;
     font-style: italic;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid #1e293b;
     padding-top: 0.75rem;
     margin-top: 0.75rem;
 }
 
-/* Intent vs Mechanism Centerpiece Card */
-.mismatch-hero-card {
-    background: #0f172a;
-    border: 2px solid #ef4444;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    margin: 1.5rem 0;
-    box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
-}
-
-.mismatch-matched-card {
-    background: #0f172a;
-    border: 2px solid #10b981;
-    border-radius: 1rem;
-    padding: 1.5rem;
-    margin: 1.5rem 0;
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
-}
-
-.comparison-box {
-    background: rgba(30, 41, 59, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+/* --- Risk Score Hero Card --- */
+.risk-card {
     border-radius: 0.75rem;
-    padding: 1.25rem;
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.risk-score-num {
+    font-size: 3.2rem;
+    font-weight: 900;
+    line-height: 1;
+    margin: 0.6rem 0 0.4rem 0;
+    letter-spacing: -0.02em;
+}
+
+/* --- Intent vs Mechanism Centerpiece Card --- */
+.comparison-box {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 0.6rem;
+    padding: 1.25rem 1.4rem;
     text-align: center;
     height: 100%;
 }
 
 .comparison-title {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     color: #94a3b8;
     text-transform: uppercase;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.6rem;
 }
 
 .comparison-val-intent {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
     font-weight: 800;
     color: #38bdf8;
     margin-bottom: 0.25rem;
 }
 
 .comparison-val-mechanism {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
     font-weight: 800;
     color: #f87171;
     margin-bottom: 0.25rem;
 }
 
 .comparison-val-mechanism-clean {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
     font-weight: 800;
     color: #34d399;
     margin-bottom: 0.25rem;
 }
 
 .mismatch-banner-critical {
-    background: linear-gradient(90deg, rgba(239, 68, 68, 0.2) 0%, rgba(185, 28, 28, 0.3) 100%);
-    border: 1px solid #ef4444;
+    background: #1f1215;
+    border: 1px solid #7f1d1d;
     color: #fca5a5;
     border-radius: 0.5rem;
     padding: 0.75rem 1rem;
     font-weight: 700;
     text-align: center;
-    font-size: 1.05rem;
+    font-size: 1rem;
     margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
 }
 
 .mismatch-banner-clean {
-    background: linear-gradient(90deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.25) 100%);
-    border: 1px solid #10b981;
+    background: #091a14;
+    border: 1px solid #064e3b;
     color: #6ee7b7;
     border-radius: 0.5rem;
     padding: 0.75rem 1rem;
     font-weight: 700;
     text-align: center;
-    font-size: 1.05rem;
+    font-size: 1rem;
     margin-top: 1rem;
 }
 
-/* Risk Score Card */
-.risk-card {
-    border-radius: 1rem;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+/* --- Evidence Box --- */
+.evidence-box {
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 0.5rem;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.5rem;
 }
 
-.risk-score-num {
-    font-size: 3.5rem;
-    font-weight: 900;
-    line-height: 1;
-    margin: 0.5rem 0;
-}
-
-/* Decision Trace */
+/* --- Decision Trace & Steps --- */
 .trace-item {
-    background: #1e293b;
-    border-left: 4px solid #6366f1;
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-left: 3px solid #6366f1;
     border-radius: 0 0.5rem 0.5rem 0;
     padding: 0.75rem 1rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.45rem;
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
@@ -178,28 +164,17 @@
 
 .trace-item-warning {
     border-left-color: #ef4444;
-    background: rgba(239, 68, 68, 0.08);
 }
 
 .trace-item-action {
     border-left-color: #10b981;
-    background: rgba(16, 185, 129, 0.08);
 }
 
-/* Evidence Cards */
-.evidence-box {
-    background: #1e293b;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
-    margin-bottom: 0.5rem;
-}
-
-/* Action Plan Card */
+/* --- Action Plan Box --- */
 .action-box {
-    background: linear-gradient(135deg, #1e1b4b 0%, #1e293b 100%);
-    border: 1px solid #4f46e5;
-    border-radius: 0.75rem;
-    padding: 1.25rem;
+    background: #0e1526;
+    border: 1px solid #312e81;
+    border-radius: 0.65rem;
+    padding: 1.25rem 1.5rem;
     margin: 1rem 0;
 }

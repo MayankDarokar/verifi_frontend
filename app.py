@@ -154,10 +154,9 @@ def main():
     st.markdown("---")
     st.markdown(
         """
-        <div style="text-align: center; color: #64748b; font-size: 0.8rem; padding: 1rem 0;">
-            ⚠ <b>VeriFi</b> is an evidence-driven financial safety system. 
-            Risk scores are deterministic assessments based on observable indicators. 
-            Always verify unexpected financial requests with official financial institutions.
+        <div style="text-align: center; color: #64748b; font-size: 0.8rem; padding: 1rem 0; line-height: 1.5;">
+            🛡️ <b>VeriFi</b> — Evidence-Driven Financial Safety Agent.<br/>
+            Risk scores and indicators are evaluated against known fraud patterns. Always verify unexpected financial requests directly with official financial institutions.
         </div>
         """,
         unsafe_allow_html=True,

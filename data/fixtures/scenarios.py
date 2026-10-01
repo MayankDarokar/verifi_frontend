@@ -7,7 +7,7 @@ Provides deterministic test cases across all 4 risk levels:
 4. NO_STRONG_INDICATORS (Legitimate transaction receipt / aligned intent)
 """
 
-from typing import Dict, List
+from typing import Dict
 from models.analysis_result import (
     AnalysisResult,
     RiskAssessment,
@@ -73,13 +73,13 @@ SCENARIOS: Dict[str, AnalysisResult] = {
             ),
         ],
         trace=[
-            TraceEvent(step_number=1, title="User submitted QR code and message text", status="done", detail="Input extracted successfully"),
-            TraceEvent(step_number=2, title="Intent Classifier: Stated intent is RECEIVE_MONEY (₹5,000)", status="done", detail="Confidence: 96%"),
-            TraceEvent(step_number=3, title="QR Decoder: Extracted UPI URI 'upi://pay?pa=claim_cashback99...'", status="done", detail="Payload successfully parsed"),
-            TraceEvent(step_number=4, title="Mechanism Engine: Technical mechanism is SEND_MONEY (Debit ₹5,000)", status="done", detail="Action: UPI Debit"),
-            TraceEvent(step_number=5, title="Mismatch Detector: INTENT–MECHANISM MISMATCH DETECTED", status="warning", detail="Receive Intent vs Send Mechanism"),
-            TraceEvent(step_number=6, title="Risk Engine: Deterministic score calculated = 85 (CRITICAL)", status="warning", detail="Score >= 75 triggers CRITICAL tier"),
-            TraceEvent(step_number=7, title="Planner: Generated immediate defensive action plan", status="action", detail="Dispatched emergency guidance"),
+            TraceEvent(step_number=1, title="Content received for payment verification", status="done", detail="Input extracted successfully"),
+            TraceEvent(step_number=2, title="Intent identified: User told they will RECEIVE ₹5,000", status="done", detail="Confidence: 96%"),
+            TraceEvent(step_number=3, title="QR decoded: Extracted UPI payment URI payload", status="done", detail="Payload successfully parsed"),
+            TraceEvent(step_number=4, title="Mechanism identified: Technical instruction requests user to SEND ₹5,000", status="done", detail="Action: UPI Debit"),
+            TraceEvent(step_number=5, title="Conflict detected: Intent–Mechanism Mismatch confirmed", status="warning", detail="Receive Intent vs Send Mechanism"),
+            TraceEvent(step_number=6, title="Risk assessed: 85/100 — Critical deception indicators present", status="warning", detail="Score >= 75 triggers CRITICAL tier"),
+            TraceEvent(step_number=7, title="Action plan: Immediate defensive guidance prepared", status="action", detail="Dispatched emergency guidance"),
         ],
         action_plan=ActionPlan(
             summary="DO NOT scan this QR code and NEVER enter your UPI PIN to receive money.",
@@ -145,12 +145,12 @@ SCENARIOS: Dict[str, AnalysisResult] = {
             ),
         ],
         trace=[
-            TraceEvent(step_number=1, title="Text input received and tokenized", status="done", detail="Length: 198 characters"),
-            TraceEvent(step_number=2, title="Entity Extractor: Extracted utility provider, deadline, phone, URL", status="done", detail="4 entities identified"),
-            TraceEvent(step_number=3, title="URL Analyzer: Scanned domain 'bses-bill-update.xyz'", status="warning", detail="Flagged as non-official TLD"),
-            TraceEvent(step_number=4, title="Heuristics Engine: Detected extreme social engineering urgency signals", status="warning", detail="Threat of immediate disconnection"),
-            TraceEvent(step_number=5, title="Risk Engine: Deterministic score calculated = 68 (HIGH)", status="warning", detail="Score >= 50 triggers HIGH tier"),
-            TraceEvent(step_number=6, title="Planner: Prepared safe verification protocol", status="action", detail="Provided official verification steps"),
+            TraceEvent(step_number=1, title="Text message scanned for financial solicitations and entities", status="done", detail="Length: 198 characters"),
+            TraceEvent(step_number=2, title="Stated purpose: Urgent electricity disconnection threat", status="done", detail="4 entities identified"),
+            TraceEvent(step_number=3, title="URL analyzed: Unofficial third-party domain flagged", status="warning", detail="Flagged as non-official TLD"),
+            TraceEvent(step_number=4, title="Social engineering signals: Extreme artificial urgency detected", status="warning", detail="Threat of immediate disconnection"),
+            TraceEvent(step_number=5, title="Risk assessed: 68/100 — High phishing and panic-inducement signals", status="warning", detail="Score >= 50 triggers HIGH tier"),
+            TraceEvent(step_number=6, title="Action plan: Safe verification protocol prepared", status="action", detail="Provided official verification steps"),
         ],
         action_plan=ActionPlan(
             summary="DO NOT click the link, download any app, or call the mobile number in the message.",
@@ -209,11 +209,11 @@ SCENARIOS: Dict[str, AnalysisResult] = {
             ),
         ],
         trace=[
-            TraceEvent(step_number=1, title="URL input received and parsed", status="done", detail="Domain: kbc-lucky-winner-draw-2026.online"),
-            TraceEvent(step_number=2, title="Domain Inspector: Checked domain age and SSL certificate", status="warning", detail="Domain age: < 14 days"),
-            TraceEvent(step_number=3, title="Content Scanner: Detected advance-fee fraud keyword patterns", status="warning", detail="Keywords: lucky winner, processing fee"),
-            TraceEvent(step_number=4, title="Risk Engine: Deterministic score calculated = 42 (SUSPICIOUS)", status="warning", detail="Score in 25-49 range"),
-            TraceEvent(step_number=5, title="Planner: Formulated safe exit guidance", status="action", detail="Advising immediate closure"),
+            TraceEvent(step_number=1, title="Destination URL parsed and structure inspected", status="done", detail="Domain: kbc-lucky-winner-draw-2026.online"),
+            TraceEvent(step_number=2, title="Domain age & registration records evaluated", status="warning", detail="Domain age: < 14 days"),
+            TraceEvent(step_number=3, title="Content analysis: Unsolicited prize & advance-fee patterns flagged", status="warning", detail="Keywords: lucky winner, processing fee"),
+            TraceEvent(step_number=4, title="Risk assessed: 42/100 — Suspicious advance-fee indicators", status="warning", detail="Score in 25-49 range"),
+            TraceEvent(step_number=5, title="Action plan: Precautionary exit guidance prepared", status="action", detail="Advising immediate closure"),
         ],
         action_plan=ActionPlan(
             summary="Close the page immediately. Do not share your bank account or Aadhaar details.",
@@ -269,12 +269,12 @@ SCENARIOS: Dict[str, AnalysisResult] = {
             ),
         ],
         trace=[
-            TraceEvent(step_number=1, title="Receipt text received and parsed", status="done", detail="Identified transaction confirmation"),
-            TraceEvent(step_number=2, title="Intent Classifier: Stated intent is PAYMENT_RECEIPT", status="done", detail="Confidence: 98%"),
-            TraceEvent(step_number=3, title="Mechanism Engine: Mechanism is standard payment record", status="done", detail="No active payment trigger found"),
-            TraceEvent(step_number=4, title="Mismatch Detector: No conflict detected between intent and payload", status="done", detail="Status: Aligned"),
-            TraceEvent(step_number=5, title="Risk Engine: Deterministic score calculated = 8 (NO_STRONG_INDICATORS)", status="done", detail="Score < 25"),
-            TraceEvent(step_number=6, title="Planner: Concluded assessment", status="action", detail="Standard security practices recommended"),
+            TraceEvent(step_number=1, title="Transaction confirmation details extracted", status="done", detail="Identified transaction confirmation"),
+            TraceEvent(step_number=2, title="Intent identified: Routine purchase payment confirmation", status="done", detail="Confidence: 98%"),
+            TraceEvent(step_number=3, title="Mechanism verified: Aligned with standard merchant debit record", status="done", detail="No active payment trigger found"),
+            TraceEvent(step_number=4, title="Consistency check: Standard reference format, no coercive signals", status="done", detail="Status: Aligned"),
+            TraceEvent(step_number=5, title="Risk assessed: 8/100 — No strong indicators of fraud", status="done", detail="Score < 25"),
+            TraceEvent(step_number=6, title="Action plan: Standard vigilance guidance provided", status="action", detail="Standard security practices recommended"),
         ],
         action_plan=ActionPlan(
             summary="No immediate threat indicators found in this receipt. Standard vigilance recommended.",
