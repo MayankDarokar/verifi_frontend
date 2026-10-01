@@ -38,7 +38,7 @@ export function RiskHeroCard({ result }) {
   const Icon = tier.icon;
 
   return (
-    <div className={`rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/10 border-l-4 ${tier.border} p-6 sm:p-7 shadow-sm mb-6 transition-colors`}>
+    <div className={`rounded-2xl bg-white/95 dark:bg-[#0f172a]/90 backdrop-blur-md border border-slate-200/90 dark:border-white/10 border-l-4 ${tier.border} p-5 sm:p-7 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.06)] dark:shadow-[0_8px_32px_-6px_rgba(0,0,0,0.5)] mb-6 sm:mb-8 transition-all`}>
       {/* Header Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
         <div className="flex items-center gap-2">
@@ -92,7 +92,7 @@ export function RiskHeroCard({ result }) {
               {result.scoreBreakdown.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-between p-2 rounded-md bg-slate-50 dark:bg-[#090d16] border border-slate-200/70 dark:border-white/5 text-xs"
+                  className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50/80 dark:bg-[#090d16]/80 border border-slate-200/70 dark:border-white/5 text-xs"
                 >
                   <span className="text-slate-700 dark:text-slate-300 font-medium">
                     {item.signal}

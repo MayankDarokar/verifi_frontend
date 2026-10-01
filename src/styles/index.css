@@ -12,6 +12,21 @@
     --text-primary: #0f172a;
     --text-secondary: #334155;
     --text-muted: #64748b;
+
+    /* Ambient Spatial Lighting - Light Mode */
+    --ambient-glow-1: rgba(99, 102, 241, 0.045);
+    --ambient-glow-2: rgba(56, 189, 248, 0.035);
+    --ambient-glow-3: rgba(147, 51, 234, 0.025);
+    --spatial-dot: rgba(15, 23, 42, 0.05);
+
+    /* Glass tokens - Light Mode */
+    --glass-bg: rgba(255, 255, 255, 0.72);
+    --glass-bg-scrolled: rgba(255, 255, 255, 0.88);
+    --glass-border: rgba(226, 232, 240, 0.85);
+    --glass-border-scrolled: rgba(203, 213, 225, 0.95);
+    --glass-highlight: rgba(255, 255, 255, 0.95);
+    --glass-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.07), 0 1px 3px 0 rgba(15, 23, 42, 0.04);
+    --glass-shadow-scrolled: 0 16px 36px -8px rgba(15, 23, 42, 0.12), 0 2px 6px 0 rgba(15, 23, 42, 0.06);
   }
 
   .dark {
@@ -23,19 +38,117 @@
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
     --text-muted: #94a3b8;
+
+    /* Ambient Spatial Lighting - Dark Mode */
+    --ambient-glow-1: rgba(99, 102, 241, 0.075);
+    --ambient-glow-2: rgba(56, 189, 248, 0.045);
+    --ambient-glow-3: rgba(139, 92, 246, 0.035);
+    --spatial-dot: rgba(255, 255, 255, 0.04);
+
+    /* Glass tokens - Dark Mode */
+    --glass-bg: rgba(15, 23, 42, 0.68);
+    --glass-bg-scrolled: rgba(11, 17, 32, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.09);
+    --glass-border-scrolled: rgba(255, 255, 255, 0.15);
+    --glass-highlight: rgba(255, 255, 255, 0.14);
+    --glass-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.55), 0 1px 2px 0 rgba(0, 0, 0, 0.35);
+    --glass-shadow-scrolled: 0 20px 42px -10px rgba(0, 0, 0, 0.72), 0 2px 6px 0 rgba(0, 0, 0, 0.45);
   }
 
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 }
 
-/* Subtle, authentic editorial elevation (no cartoonish orbs or neon glows) */
-.editorial-card {
+/* Procedural Spatial Background Canvas */
+.spatial-dot-grid {
+  background-image: radial-gradient(var(--spatial-dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.spatial-micro-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* Extremely slow, imperceptible ambient light drift */
+@keyframes ambient-drift-slow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(10px, 14px, 0);
+  }
+}
+
+.ambient-drift {
+  animation: ambient-drift-slow 30s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Glass surface styling with layered depth */
+.glass-panel {
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  position: relative;
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, padding 0.25s ease, transform 0.25s ease;
+}
+
+.glass-panel-scrolled {
+  background-color: var(--glass-bg-scrolled);
+  border-color: var(--glass-border-scrolled);
+  box-shadow: var(--glass-shadow-scrolled);
+}
+
+/* Specular top edge highlight for tactile glass realism */
+.glass-specular::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-highlight), transparent);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Very subtle ambient radial refraction gradient */
+.glass-refraction::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.035), transparent 70%);
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* Standardized Section Surface Card */
+.section-surface {
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px -4px rgba(15, 23, 42, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dark .section-surface {
+  background-color: rgba(15, 23, 42, 0.9);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px -6px rgba(0, 0, 0, 0.5);
+}
+
+/* Subtle, authentic editorial elevation */
+.editorial-card {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .editorial-card:hover {
@@ -82,5 +195,8 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .ambient-drift {
+    animation: none !important;
   }
 }

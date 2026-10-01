@@ -13,8 +13,8 @@ export function InvestigationProgress({ currentStage }) {
   const activeIndex = currentStage ? currentStage.step - 1 : 0;
 
   return (
-    <div className="rounded-xl bg-white dark:bg-[#0f172a] border border-indigo-200 dark:border-indigo-900/60 p-5 sm:p-6 shadow-sm mb-6 transition-colors">
-      <div className="flex items-center gap-2.5 mb-4">
+    <div className="rounded-2xl bg-white/95 dark:bg-[#0f172a]/90 backdrop-blur-md border border-indigo-200/90 dark:border-indigo-900/60 p-5 sm:p-7 shadow-[0_4px_24px_-4px_rgba(99,102,241,0.08)] mb-6 sm:mb-8 transition-all">
+      <div className="flex items-center gap-3 mb-4">
         <Loader2 className="w-4 h-4 text-indigo-600 dark:text-indigo-400 animate-spin" />
         <div>
           <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
@@ -34,9 +34,9 @@ export function InvestigationProgress({ currentStage }) {
           return (
             <div
               key={idx}
-              className={`flex items-center gap-2.5 p-2 rounded-md text-xs transition-colors ${
+              className={`flex items-center gap-3 p-2.5 rounded-xl text-xs sm:text-[13px] transition-colors ${
                 isCurrent
-                  ? 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-950 dark:text-indigo-200 font-semibold'
+                  ? 'bg-indigo-50/90 dark:bg-indigo-950/40 text-indigo-950 dark:text-indigo-200 font-semibold border border-indigo-200/70 dark:border-indigo-800/40'
                   : isDone
                   ? 'text-slate-600 dark:text-slate-300'
                   : 'text-slate-400 dark:text-slate-600'
@@ -44,11 +44,11 @@ export function InvestigationProgress({ currentStage }) {
             >
               <div className="shrink-0">
                 {isDone ? (
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                 ) : isCurrent ? (
-                  <div className="w-3.5 h-3.5 rounded-full border-2 border-indigo-600 dark:border-indigo-400 border-t-transparent animate-spin" />
+                  <div className="w-4 h-4 rounded-full border-2 border-indigo-600 dark:border-indigo-400 border-t-transparent animate-spin" />
                 ) : (
-                  <div className="w-3.5 h-3.5 rounded-full border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[9px] text-slate-400">
+                  <div className="w-4 h-4 rounded-full border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] text-slate-400">
                     {idx + 1}
                   </div>
                 )}

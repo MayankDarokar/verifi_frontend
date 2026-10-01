@@ -5,9 +5,9 @@ export function IntentMechanismComparator({ result }) {
   const { intent, mechanism, mismatch } = result;
 
   return (
-    <div className="rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/10 p-6 sm:p-7 shadow-sm mb-6 transition-colors">
+    <div className="rounded-2xl bg-white/95 dark:bg-[#0f172a]/90 backdrop-blur-md border border-slate-200/90 dark:border-white/10 p-5 sm:p-7 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.06)] dark:shadow-[0_8px_32px_-6px_rgba(0,0,0,0.5)] mb-6 sm:mb-8 transition-all">
       {/* Title */}
-      <div className="flex flex-wrap items-center justify-between gap-2 mb-5">
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
         <div>
           <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
             <ArrowRightLeft className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
@@ -20,12 +20,12 @@ export function IntentMechanismComparator({ result }) {
 
         <div className="text-xs">
           {mismatch.detected ? (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-red-100 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 font-bold uppercase text-[11px]">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-red-100 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 font-bold uppercase text-[11px]">
               <AlertTriangle className="w-3.5 h-3.5" />
               <span>Conflict Detected</span>
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 font-bold uppercase text-[11px]">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 font-bold uppercase text-[11px]">
               <CheckCircle2 className="w-3.5 h-3.5" />
               <span>Aligned</span>
             </span>
@@ -33,22 +33,24 @@ export function IntentMechanismComparator({ result }) {
         </div>
       </div>
 
-      {/* Structured Comparison Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      {/* Structured Comparison Grid (2 columns on md/desktop, single column stack on mobile) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 mb-4 sm:mb-5">
         {/* Left: What the Message Claims */}
-        <div className="p-4 rounded-lg bg-slate-50 dark:bg-[#090d16] border border-slate-200 dark:border-white/10">
-          <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
-            Claimed Stated Intent
+        <div className="p-4 sm:p-5 rounded-xl bg-slate-50/80 dark:bg-[#090d16]/80 border border-slate-200/80 dark:border-white/10 flex flex-col justify-between">
+          <div>
+            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
+              Claimed Stated Intent
+            </div>
+            <div className="text-sm sm:text-base font-bold text-slate-900 dark:text-white mb-2">
+              {intent.label.replace(/_/g, ' ')}
+            </div>
+            <p className="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+              {intent.summary}
+            </p>
           </div>
-          <div className="text-sm font-bold text-slate-900 dark:text-white mb-1.5">
-            {intent.label.replace(/_/g, ' ')}
-          </div>
-          <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
-            {intent.summary}
-          </p>
           {intent.stated_amount && (
-            <div className="pt-2 border-t border-slate-200 dark:border-white/10 flex items-center justify-between text-xs">
-              <span className="text-slate-500 dark:text-slate-400">Claimed Receipt:</span>
+            <div className="pt-2.5 border-t border-slate-200/80 dark:border-white/10 flex items-center justify-between text-xs">
+              <span className="text-slate-500 dark:text-slate-400 font-medium">Claimed Receipt:</span>
               <span className="font-mono font-bold text-slate-900 dark:text-white">
                 ₹{intent.stated_amount.toLocaleString('en-IN')}
               </span>
@@ -57,27 +59,29 @@ export function IntentMechanismComparator({ result }) {
         </div>
 
         {/* Right: What the Mechanism Executes */}
-        <div className={`p-4 rounded-lg border ${
+        <div className={`p-4 sm:p-5 rounded-xl border flex flex-col justify-between ${
           mismatch.detected
-            ? 'bg-red-50/50 dark:bg-red-950/20 border-red-200 dark:border-red-900/40'
-            : 'bg-slate-50 dark:bg-[#090d16] border-slate-200 dark:border-white/10'
+            ? 'bg-red-50/50 dark:bg-red-950/20 border-red-200/90 dark:border-red-900/40'
+            : 'bg-slate-50/80 dark:bg-[#090d16]/80 border-slate-200/80 dark:border-white/10'
         }`}>
-          <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
-            Observed Technical Execution
+          <div>
+            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
+              Observed Technical Execution
+            </div>
+            <div className={`text-sm sm:text-base font-bold mb-2 ${
+              mismatch.detected ? 'text-red-700 dark:text-red-400' : 'text-slate-900 dark:text-white'
+            }`}>
+              {mechanism.label.replace(/_/g, ' ')}
+            </div>
+            <p className="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+              {mechanism.summary}
+            </p>
           </div>
-          <div className={`text-sm font-bold mb-1.5 ${
-            mismatch.detected ? 'text-red-700 dark:text-red-400' : 'text-slate-900 dark:text-white'
-          }`}>
-            {mechanism.label.replace(/_/g, ' ')}
-          </div>
-          <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
-            {mechanism.summary}
-          </p>
           {(mechanism.actual_amount || mechanism.target_upi_id || mechanism.target_url) && (
-            <div className="pt-2 border-t border-slate-200 dark:border-white/10 space-y-1 text-xs">
+            <div className="pt-2.5 border-t border-slate-200/80 dark:border-white/10 space-y-1.5 text-xs">
               {mechanism.actual_amount && (
                 <div className="flex items-center justify-between">
-                  <span className="text-slate-500 dark:text-slate-400">Actual Outbound Debit:</span>
+                  <span className="text-slate-500 dark:text-slate-400 font-medium">Actual Outbound Debit:</span>
                   <span className="font-mono font-bold text-red-600 dark:text-red-400">
                     ₹{mechanism.actual_amount.toLocaleString('en-IN')}
                   </span>
@@ -101,10 +105,10 @@ export function IntentMechanismComparator({ result }) {
       </div>
 
       {/* Mismatch Finding Summary */}
-      <div className={`p-3.5 rounded-lg border text-xs leading-relaxed ${
+      <div className={`p-4 rounded-xl border text-xs sm:text-[13px] leading-relaxed ${
         mismatch.detected
-          ? 'bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-800/40 text-red-900 dark:text-red-300'
-          : 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800/40 text-emerald-900 dark:text-emerald-300'
+          ? 'bg-red-50/80 dark:bg-red-950/30 border-red-200/90 dark:border-red-800/40 text-red-900 dark:text-red-200'
+          : 'bg-emerald-50/80 dark:bg-emerald-950/30 border-emerald-200/90 dark:border-emerald-800/40 text-emerald-900 dark:text-emerald-200'
       }`}>
         <span className="font-bold mr-1.5">
           {mismatch.detected ? 'Analysis Finding:' : 'Verification Result:'}

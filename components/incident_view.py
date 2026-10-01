@@ -16,7 +16,7 @@ def render_incident_view():
 <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid #ef4444; border-radius: 0.75rem; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
     <b style="color: #fca5a5; font-size: 1.05rem;">Immediate Golden-Hour Protection:</b><br/>
     <span style="color: #cbd5e1; font-size: 0.9rem;">
-        If money was debited within the last 2 to 4 hours, immediate notification to your bank and <b>1930</b> can freeze the recipient account before funds are laundered.
+        If money was debited within the last 0 to 2 hours, immediate notification to your bank and <b>1930</b> can freeze the recipient account before funds are laundered.
     </span>
 </div>
 """).strip()

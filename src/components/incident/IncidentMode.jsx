@@ -102,26 +102,26 @@ Thank you.
   };
 
   return (
-    <div className="max-w-4xl mx-auto py-2 sm:py-6">
+    <div className="w-full py-2 sm:py-4">
       {/* Golden-Hour Emergency Banner */}
-      <div className="rounded-xl bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/40 p-5 sm:p-6 mb-6">
+      <div className="rounded-2xl bg-red-50/90 dark:bg-red-950/25 border border-red-200/90 dark:border-red-900/40 backdrop-blur-sm p-5 sm:p-6 mb-6 sm:mb-8 shadow-sm">
         <div className="flex items-start gap-3.5">
-          <AlertOctagon className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
+          <AlertOctagon className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5 animate-pulse-subtle" />
           <div>
             <div className="text-xs font-bold uppercase tracking-wider text-red-800 dark:text-red-300 mb-1">
-              Immediate Golden-Hour Priority (0–4 Hours Window)
+              Immediate Golden-Hour Priority (0–2 Hours Window)
             </div>
-            <p className="text-xs text-red-900/90 dark:text-slate-300 leading-relaxed">
-              If an unauthorized debit happened within the last 2 to 4 hours, immediate notification to your bank fraud division and dialing <b>1930</b> can freeze the recipient account before stolen funds exit through mule networks.
+            <p className="text-xs sm:text-[13px] text-red-900/90 dark:text-slate-300 leading-relaxed">
+              If an unauthorized debit happened within the last 0 to 2 hours, immediate notification to your bank fraud division and dialing <b>1930</b> can freeze the recipient account before stolen funds exit through mule networks.
             </p>
           </div>
         </div>
       </div>
 
       {/* Incident Details Form */}
-      <div className="rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/10 p-6 sm:p-7 shadow-sm mb-6 transition-colors">
+      <div className="rounded-2xl bg-white/95 dark:bg-[#0f172a]/90 backdrop-blur-md border border-slate-200/90 dark:border-white/10 p-5 sm:p-7 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.06)] dark:shadow-[0_8px_32px_-6px_rgba(0,0,0,0.5)] mb-6 sm:mb-8 transition-all">
         <div className="mb-5">
-          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight">
             Incident Response Intake
           </h3>
           <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -248,8 +248,10 @@ Thank you.
           {/* Submit */}
           <button
             type="submit"
-            className="w-full py-3 px-5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm tracking-wide transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+            className="relative w-full py-3.5 px-5 rounded-xl bg-red-600 hover:bg-red-500 active:bg-red-700 text-white font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 flex items-center justify-center gap-2 shadow-[0_4px_14px_rgba(239,68,68,0.3)] hover:shadow-[0_6px_20px_rgba(239,68,68,0.4)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer overflow-hidden group"
           >
+            <span className="absolute inset-x-0 top-0 h-px bg-white/25 pointer-events-none" />
+            <AlertOctagon className="w-4 h-4 transition-transform duration-200 group-hover:scale-105" />
             <span>Generate Emergency Action Plan & Complaint Draft</span>
           </button>
         </form>
@@ -257,11 +259,13 @@ Thank you.
 
       {/* Generated Response Protocol */}
       {generatedPlan && (
-        <div className="space-y-5">
+        <div className="space-y-4 sm:space-y-5 animate-in fade-in slide-in-from-bottom-2 duration-300">
           {/* Step 1: Call 1930 */}
-          <div className="rounded-xl bg-slate-50 dark:bg-[#0f172a] border border-indigo-200 dark:border-indigo-900/50 p-5 sm:p-6 shadow-sm">
-            <div className="flex items-start gap-3">
-              <PhoneCall className="w-5 h-5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
+          <div className="rounded-2xl bg-indigo-50/70 dark:bg-[#0f172a]/95 border border-indigo-200/90 dark:border-indigo-900/50 p-5 sm:p-6 shadow-sm backdrop-blur-sm">
+            <div className="flex items-start gap-3.5">
+              <div className="p-2 rounded-xl bg-indigo-100 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800/60 text-indigo-600 dark:text-indigo-400 shrink-0">
+                <PhoneCall className="w-4 h-4" />
+              </div>
               <div>
                 <h4 className="text-sm font-bold text-slate-900 dark:text-white">
                   Step 1: Call 1930 Immediately
@@ -274,9 +278,11 @@ Thank you.
           </div>
 
           {/* Step 2: Contact Bank Fraud Cell */}
-          <div className="rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/10 p-5 sm:p-6 shadow-sm">
-            <div className="flex items-start gap-3">
-              <Building2 className="w-5 h-5 text-slate-600 dark:text-slate-400 shrink-0 mt-0.5" />
+          <div className="rounded-2xl bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-md border border-slate-200/90 dark:border-white/10 p-5 sm:p-6 shadow-sm">
+            <div className="flex items-start gap-3.5">
+              <div className="p-2 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 shrink-0">
+                <Building2 className="w-4 h-4" />
+              </div>
               <div className="space-y-1.5">
                 <h4 className="text-sm font-bold text-slate-900 dark:text-white">
                   Step 2: Contact {generatedPlan.bankName}'s Fraud Cell
@@ -291,7 +297,7 @@ Thank you.
           </div>
 
           {/* Step 3: Formal Cybercrime Complaint Draft */}
-          <div className="rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/10 p-5 sm:p-6 shadow-sm">
+          <div className="rounded-2xl bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-md border border-slate-200/90 dark:border-white/10 p-5 sm:p-6 shadow-sm">
             <div className="flex items-center justify-between gap-2 mb-3">
               <div className="flex items-center gap-2">
                 <FileText className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />

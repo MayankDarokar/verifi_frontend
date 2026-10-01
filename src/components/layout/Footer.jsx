@@ -3,7 +3,7 @@ import { Shield } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="w-full border-t border-slate-200 dark:border-white/10 bg-white dark:bg-[#090d16] py-8 mt-12 transition-colors">
+    <footer className="relative z-10 w-full border-t border-slate-200/80 dark:border-white/10 bg-white/60 dark:bg-[#090d16]/60 backdrop-blur-md py-8 sm:py-10 mt-14 sm:mt-16 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-2">
         <div className="flex items-center justify-center gap-1.5 text-xs font-bold text-slate-800 dark:text-slate-200">
           <Shield className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />

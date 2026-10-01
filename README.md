@@ -1,5 +1,9 @@
 # VeriFi — Frontend Prototype
 
+<p align="center">
+  <img src="./public/verifi-banner.png" alt="VeriFi — Evidence-Driven Financial Safety Agent" width="100%" />
+</p>
+
 **Hackathon Project | Evidence-Driven Financial Safety Agent**
 
 ---

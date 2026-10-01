@@ -76,7 +76,7 @@ export function InvestigationInput({
   };
 
   return (
-    <div className="rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/10 p-5 sm:p-7 shadow-sm transition-colors mb-6">
+    <div className="rounded-2xl bg-white/95 dark:bg-[#0f172a]/90 backdrop-blur-md border border-slate-200/90 dark:border-white/10 p-5 sm:p-7 shadow-[0_4px_24px_-4px_rgba(15,23,42,0.06)] dark:shadow-[0_8px_32px_-6px_rgba(0,0,0,0.5)] transition-all mb-6 sm:mb-8">
       {/* Workspace Header */}
       <div className="mb-5">
         <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight mb-1">
@@ -88,14 +88,14 @@ export function InvestigationInput({
       </div>
 
       {/* Input Mode Tabs */}
-      <div className="flex items-center gap-2 mb-5 border-b border-slate-200 dark:border-white/10 pb-3">
+      <div className="flex items-center gap-1.5 sm:gap-2 mb-5 border-b border-slate-200/80 dark:border-white/10 pb-3">
         <button
           type="button"
           onClick={() => { setInputType('text'); if (onInputChange) onInputChange(); }}
-          className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+          className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 cursor-pointer ${
             inputType === 'text'
-              ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
-              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5'
+              ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-white/5'
           }`}
         >
           <MessageSquare className="w-3.5 h-3.5" />
@@ -105,10 +105,10 @@ export function InvestigationInput({
         <button
           type="button"
           onClick={() => { setInputType('url'); if (onInputChange) onInputChange(); }}
-          className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+          className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 cursor-pointer ${
             inputType === 'url'
-              ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
-              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5'
+              ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-white/5'
           }`}
         >
           <LinkIcon className="w-3.5 h-3.5" />
@@ -118,10 +118,10 @@ export function InvestigationInput({
         <button
           type="button"
           onClick={() => { setInputType('qr'); if (onInputChange) onInputChange(); }}
-          className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+          className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 cursor-pointer ${
             inputType === 'qr'
-              ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
-              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5'
+              ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/80 dark:hover:bg-white/5'
           }`}
         >
           <QrCode className="w-3.5 h-3.5" />
@@ -254,9 +254,10 @@ export function InvestigationInput({
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-3 px-5 rounded-lg bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold text-xs sm:text-sm tracking-wide transition-all flex items-center justify-center gap-2 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            className="relative w-full py-3.5 px-5 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold text-xs sm:text-sm tracking-wide transition-all duration-200 flex items-center justify-center gap-2.5 shadow-[0_4px_14px_rgba(99,102,241,0.28)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.38)] hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:shadow-none cursor-pointer overflow-hidden group"
           >
-            <ShieldCheck className="w-4 h-4" />
+            <span className="absolute inset-x-0 top-0 h-px bg-white/25 pointer-events-none" />
+            <ShieldCheck className="w-4 h-4 transition-transform duration-200 group-hover:scale-105" />
             <span>{isLoading ? 'Investigating Evidence & Payment Payload...' : 'Run VeriFi Deep Investigation'}</span>
           </button>
         </div>
