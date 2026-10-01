@@ -1,6 +1,7 @@
 """Evidence Presentation Component for VeriFi."""
 
 import streamlit as st
+import textwrap
 from typing import List
 from models.analysis_result import EvidenceItem
 
@@ -36,17 +37,14 @@ def render_evidence_card(evidence: List[EvidenceItem]):
             }
             border_col = severity_colors.get(item.severity, "#38bdf8")
 
-            st.markdown(
-                f"""
-                <div class="evidence-box" style="border-left: 3px solid {border_col};">
-                    <div style="font-weight: 700; color: #f1f5f9; font-size: 0.95rem;">
-                        {item.title}
-                    </div>
-                    <div style="color: #cbd5e1; font-size: 0.85rem; margin-top: 0.25rem;">
-                        {item.detail}
-                    </div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-        st.markdown("<div style='margin-bottom: 0.5rem;'></div>", unsafe_allow_html=True)
+            box_html = textwrap.dedent(f"""
+<div class="evidence-box" style="border-left: 3px solid {border_col}; margin-bottom: 0.5rem; background: #1e293b; border-radius: 0.5rem; padding: 0.75rem 1rem;">
+    <div style="font-weight: 700; color: #f1f5f9; font-size: 0.95rem;">
+        {item.title}
+    </div>
+    <div style="color: #cbd5e1; font-size: 0.85rem; margin-top: 0.25rem; line-height: 1.35;">
+        {item.detail}
+    </div>
+</div>
+""").strip()
+            st.markdown(box_html, unsafe_allow_html=True)

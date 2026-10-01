@@ -4,6 +4,7 @@ Main Streamlit Application Shell.
 """
 
 import os
+import hashlib
 import streamlit as st
 
 # 1. Page Configuration MUST be the first Streamlit command
@@ -33,7 +34,21 @@ from components.incident_view import render_incident_view
 
 from services.analysis_service import analysis_service
 from models.analysis_result import AnalysisResult
-from utils.validators import validate_text_input, validate_url, validate_qr_image
+from utils.validators import validate_text_input, validate_url, validate_qr_image, validate_qr_size
+
+
+def compute_input_hash(input_type: str, user_payload: any, scenario_key: str | None) -> str:
+    """Compute a deterministic hash representing the current input state."""
+    if input_type == "text":
+        content = f"text:{str(user_payload).strip()}:{scenario_key or ''}"
+    elif input_type == "url":
+        content = f"url:{str(user_payload).strip()}:{scenario_key or ''}"
+    elif input_type == "qr":
+        filename = user_payload.get("filename", "") if isinstance(user_payload, dict) else str(user_payload)
+        content = f"qr:{filename}:{scenario_key or ''}"
+    else:
+        content = f"unknown:{str(user_payload)}"
+    return hashlib.md5(content.encode("utf-8")).hexdigest()
 
 
 def main():
@@ -44,47 +59,44 @@ def main():
     render_header()
 
     if "Analyze" in active_mode:
-        # Check if user selected a quick scenario from sidebar
-        if selected_scenario and "last_scenario" not in st.session_state:
-            st.session_state["last_scenario"] = selected_scenario
-
+        # Render input controls and capture current user input & submit trigger
         input_type, user_payload, submit_clicked = render_input_panel(preset_scenario=selected_scenario)
 
-        # Trigger analysis if button clicked OR a demo scenario is explicitly selected
-        should_run = submit_clicked or (selected_scenario is not None and st.session_state.get("last_run_scenario") != selected_scenario)
+        # Compute current input fingerprint
+        current_input_hash = compute_input_hash(input_type, user_payload, selected_scenario)
 
-        if should_run:
-            st.session_state["last_run_scenario"] = selected_scenario
-            
-            # Input validation
+        # Handle Submit Click
+        if submit_clicked:
             valid = True
             raw_input_str = ""
 
             if input_type == "text":
                 if isinstance(user_payload, str) and validate_text_input(user_payload):
                     raw_input_str = user_payload
-                elif selected_scenario:
-                    raw_input_str = "Demo scenario payload"
                 else:
-                    st.error("Please enter a message of at least 3 characters.")
+                    st.error("❌ Please enter a message of at least 3 characters.")
                     valid = False
 
             elif input_type == "url":
                 if isinstance(user_payload, str) and validate_url(user_payload):
                     raw_input_str = user_payload
-                elif selected_scenario:
-                    raw_input_str = "https://demo-url.xyz"
                 else:
-                    st.error("Please enter a valid URL (e.g., https://example.com).")
+                    st.error("❌ Please enter a valid URL (e.g., https://example.com).")
                     valid = False
 
             elif input_type == "qr":
                 if isinstance(user_payload, dict) and "filename" in user_payload:
-                    raw_input_str = f"QR image: {user_payload['filename']}"
-                elif selected_scenario:
-                    raw_input_str = "QR image upload"
+                    file_obj = user_payload.get("file_data")
+                    if file_obj and not validate_qr_size(file_obj):
+                        st.error("❌ File exceeds 10 MB limit. Please upload an image under 10 MB.")
+                        valid = False
+                    elif not validate_qr_image(user_payload["filename"]):
+                        st.error("❌ Unsupported file format. Please upload a PNG, JPG, or WebP image.")
+                        valid = False
+                    else:
+                        raw_input_str = f"QR image: {user_payload['filename']}"
                 else:
-                    st.error("Please upload a valid QR image file.")
+                    st.error("❌ Please upload a valid QR image file.")
                     valid = False
 
             if valid:
@@ -95,30 +107,44 @@ def main():
                         language=selected_language,
                         scenario_key=selected_scenario,
                     )
+                
+                # Store submitted result and input hash
+                st.session_state["submitted_result"] = result
+                st.session_state["submitted_input_hash"] = current_input_hash
+                st.session_state["submitted_input_preview"] = raw_input_str
 
+        # Check if an analysis result exists in session state
+        stored_result: AnalysisResult | None = st.session_state.get("submitted_result", None)
+        submitted_hash: str | None = st.session_state.get("submitted_input_hash", None)
+
+        if stored_result is not None:
+            # Check if current input matches the submitted snapshot
+            if current_input_hash != submitted_hash:
+                st.warning("⚠️ Input modified since last analysis. Click **Run VeriFi Deep Investigation** to update the results.")
+            else:
                 st.markdown("---")
                 st.markdown("### 📊 Investigation Results")
 
                 # 1. Deterministic Risk Hero Card
-                render_risk_card(result)
+                render_risk_card(stored_result)
 
                 # 2. Centerpiece: Intent vs Mechanism Mismatch (Tier-1 Killer Feature)
-                render_mismatch_card(result)
+                render_mismatch_card(stored_result)
 
-                # Two column layout for Evidence + Decision Trace
+                # Two-column layout for Evidence + Decision Trace
                 col_left, col_right = st.columns([1, 1])
 
                 with col_left:
                     # 3. Discovered Technical Evidence
-                    render_evidence_card(result.evidence)
+                    render_evidence_card(stored_result.evidence)
 
                 with col_right:
-                    # 4. Observable Agent Decision Trace
-                    render_decision_trace(result.trace)
+                    # 4. Observable Investigation Decision Trace
+                    render_decision_trace(stored_result.trace)
 
                 # 5. Actionable Guidance & Defense Plan
                 st.markdown("---")
-                render_recommendation(result.action_plan)
+                render_recommendation(stored_result.action_plan)
 
     elif "Scammed" in active_mode:
         # Render Incident Response Workflow
