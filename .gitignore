@@ -1,7 +1,16 @@
+
+# Node
+node_modules/
+dist/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Python
 __pycache__/
 *.py[cod]
-*.log
-.env
-.venv/
-venv/
-.vscode/
